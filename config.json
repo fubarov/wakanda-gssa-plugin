@@ -1,0 +1,17 @@
+{
+  "app_id": "org.fubarov.wakanda",
+  "app_name": "Stremio Wakanda Addon",
+  "app_short_name": "Wakanda",
+  "app_description": "Wakanda addon for Stremio",
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+  "tracker": {
+    "url": "https://domain of wakanda tracker ;)",
+    "username": "your username",
+    "password": "your password",
+    "user_id": "your user id"
+  },
+  "proxy": {
+    "enabled": false,
+    "url": ""
+  }
+}
