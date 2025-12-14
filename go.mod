@@ -13,5 +13,3 @@ require (
 	github.com/zeebo/bencode v1.0.0 // indirect
 	golang.org/x/net v0.48.0 // indirect
 )
-
-replace github.com/fubarov/gssa-sdk => /home/fubar/golang/fubarov/gssa-sdk
