@@ -67,6 +67,20 @@ func (w *Wakanda) Init(rawConfig json.RawMessage, logger gssa_sdk.Logger) {
 	w.isConfigured = true
 	w.jar, _ = cookiejar.New(nil)
 
+	if err := json.Unmarshal(rawConfig, w.settings); err != nil {
+		w.isConfigured = false
+		w.logger.Error(fmt.Sprintf("Failed to parse plugin config: %v", err))
+	}
+
+	if w.settings.AppID == "" {
+		w.isConfigured = false
+		w.logger.Error("Plugin config is invalid: missing app_id")
+	}
+
+	if !w.isConfigured {
+		return
+	}
+
 	var transport = &http.Transport{}
 	if w.settings.Proxy.IsEnabled() {
 		proxyURL, err := url.Parse(w.settings.Proxy.Url)
@@ -82,20 +96,6 @@ func (w *Wakanda) Init(rawConfig json.RawMessage, logger gssa_sdk.Logger) {
 	w.client = &http.Client{
 		Jar:       w.jar,
 		Transport: transport,
-	}
-
-	if err := json.Unmarshal(rawConfig, w.settings); err != nil {
-		w.isConfigured = false
-		w.logger.Error(fmt.Sprintf("Failed to parse plugin config: %v", err))
-	}
-
-	if w.settings.AppID == "" {
-		w.isConfigured = false
-		w.logger.Error("Plugin config is invalid: missing app_id")
-	}
-
-	if !w.isConfigured {
-		return
 	}
 
 	_ = w.login()
